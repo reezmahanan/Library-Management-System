@@ -10,7 +10,7 @@ Small Java console application for managing a library's basic operations (books 
 
 ## Requirements
 
-- Java 8 or newer
+- IntelliJ IDEA
 - Git (for source control)
 
 ## Build and run (command line)
