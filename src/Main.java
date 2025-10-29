@@ -4,74 +4,79 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         LibraryManager manager = new LibraryManager();
-        boolean running = true;
 
-        while (running) {
-            System.out.println("######## Welcome to Library Management System! ########");
-            System.out.println("Press 1 for Adding a Book");
-            System.out.println("Press 2 for Removing a Book");
-            System.out.println("Press 3 for Searching Books");
-            System.out.println("Press 4 for Buying a Book");
-            System.out.println("Press 5 for Viewing all Books");
-            System.out.println("Press 6 to Exit system");
-            System.out.print("Choose Your option: ");
+        while (true) {
+            System.out.println("===== Library Management System =====");
+            System.out.println("1. Add Book");
+            System.out.println("2. View All Books");
+            System.out.println("3. Remove Book");
+            System.out.println("4. Search Book");
+            System.out.println("5. Buy Book");
+            System.out.println("6. Exit");
+            System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume leftover newline
+            scanner.nextLine();
 
             switch (choice) {
-                case 1: // Add Book
-                    System.out.print("Enter book title: ");
+                case 1:
+                    System.out.print("Enter Book Name: ");
+                    String name = scanner.nextLine();
+
+                    System.out.print("Enter Book Title: ");
                     String title = scanner.nextLine();
 
-                    System.out.print("Enter author name: ");
+                    System.out.print("Enter Book ID: ");
+                    String id = scanner.nextLine();
+
+                    System.out.print("Enter Author Name: ");
                     String author = scanner.nextLine();
 
-                    System.out.print("Enter book price: ");
-                    double price = scanner.nextDouble();
-
-                    System.out.print("Enter book quantity: ");
+                    System.out.print("Enter Book Quantity: ");
                     int quantity = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
+                    scanner.nextLine();
 
-                    Book newBook = new Book(title, author, price, quantity);
+                    Book newBook = new Book(name, title, id, author, quantity);
                     manager.addBook(newBook);
                     break;
 
-                case 2: // Remove Book
-                    System.out.print("Enter book title to remove: ");
-                    String removeTitle = scanner.nextLine();
-                    manager.removeBook(removeTitle);
+                case 2:
+                    manager.showAllBooks();
                     break;
 
-                case 3: // Search Book
-                    System.out.print("Enter book title or author to search: ");
-                    String searchTerm = scanner.nextLine();
-                    manager.searchBook(searchTerm);
+                case 3:
+                    System.out.print("Enter Book Name to remove: ");
+                    String removeName = scanner.nextLine();
+                    manager.removeBook(removeName);
                     break;
 
-                case 4: // Buy Book
-                    System.out.print("Enter book title to buy: ");
-                    String buyTitle = scanner.nextLine();
-                    System.out.print("Enter quantity: ");
+                case 4:
+                    System.out.print("Enter Book Name to search: ");
+                    String searchName = scanner.nextLine();
+                    manager.searchBook(searchName);
+                    break;
+
+                case 5:
+                    System.out.print("Enter Book Name to buy: ");
+                    String buyName = scanner.nextLine();
+
+                    System.out.print("Enter quantity to buy: ");
                     int buyQuantity = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
-                    manager.buyBook(buyTitle, buyQuantity);
+                    scanner.nextLine();
+
+                    manager.buyBook(buyName, buyQuantity);
                     break;
 
-                case 5: // View All Books
-                    manager.displayAllBooks();
-                    break;
-
-                case 6: // Exit
-                    System.out.println("Exiting system....");
+                case 6:
+                    System.out.println("Exiting program...");
                     System.out.println("Thank you for using Library Management System!");
                     scanner.close();
                     return;
 
                 default:
-                    System.out.println("Invalid choice! Please try again.\n");
+                    System.out.println(" Invalid choice! Please try again.\n");
             }
         }
     }
 }
+
