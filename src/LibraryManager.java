@@ -1,88 +1,65 @@
 import java.util.ArrayList;
 
 public class LibraryManager {
-    // Book ArrayList
-    private ArrayList<Book> bookArray = new ArrayList<>();
+    private ArrayList<Book> books = new ArrayList<>();
 
-    // Add book
     public void addBook(Book book) {
-        bookArray.add(book);
-        System.out.println("Book added successfully!\n");
+        books.add(book);
+        System.out.println("Book added: " + book.getName());
     }
 
-    // Remove book
-    public void removeBook(String bookName) {
-        boolean found = false;
-        for (Book book : bookArray) {
-            if (book.getName().equalsIgnoreCase(bookName)) {
-                bookArray.remove(book);
-                System.out.println("Book removed successfully!");
-                found = true;
-                break; // exit loop immediately after removing
+    public void removeBook(String name) {
+        for (Book book : books) {
+            if (book.getName().equalsIgnoreCase(name)) {
+                books.remove(book);
+                System.out.println(" Book removed: " + name);
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No Book found with title: " + bookName + "\n");
-        }
+        System.out.println("Book not found: " + name);
     }
 
-    // Search book
-    public void searchBook(String searchTerm) {
-        boolean found = false;
-        System.out.println("Search results for: " + searchTerm);
-        for (Book book : bookArray) {
-            if (book.getName().toLowerCase().contains(searchTerm.toLowerCase()) ||
-                    book.getAuthor().toLowerCase().contains(searchTerm.toLowerCase())) {
+    public void searchBook(String name) {
+        for (Book book : books) {
+            if (book.getName().equalsIgnoreCase(name)) {
+                System.out.println(" Book found:");
                 book.displayInfo();
-                found = true;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No books found matching: " + searchTerm + "\n");
-        } else {
-            System.out.println();
-        }
+        System.out.println(" Book not found: " + name);
     }
 
-    // Buy book
-    public void buyBook(String bookName, int quantity) {
-        boolean found = false;
-        for (Book book : bookArray) {
-            if (book.getName().equalsIgnoreCase(bookName)) {
-                found = true;
+    public void buyBook(String name, int quantity) {
+        for (Book book : books) {
+            if (book.getName().equalsIgnoreCase(name)) {
                 if (book.getCount() >= quantity) {
                     book.setCount(book.getCount() - quantity);
-                    double totalPrice = book.getPrice() * quantity;
-                    System.out.println("Successfully purchased " + quantity + " copy(ies) of '" + bookName + "'");
-                    System.out.println("Total cost: $" + totalPrice);
-                    System.out.println("Remaining stock: " + book.getCount() + "\n");
+                    System.out.println(" Successfully purchased " + quantity + " copy(ies) of '" + name + "'");
+                    System.out.println(" Remaining stock: " + book.getCount());
 
                     // Remove book if stock becomes 0
                     if (book.getCount() == 0) {
-                        bookArray.remove(book);
-                        System.out.println("Book removed from inventory as stock reached zero.\n");
+                        books.remove(book);
+                        System.out.println(" Book removed from inventory as stock reached zero.");
                     }
                 } else {
-                    System.out.println("Insufficient stock! Available: " + book.getCount() + ", Requested: " + quantity + "\n");
+                    System.out.println(" Insufficient stock! Available: " + book.getCount() + ", Requested: " + quantity);
                 }
-                break;
+                return;
             }
         }
-        if (!found) {
-            System.out.println("No Book found with title: " + bookName + "\n");
-        }
+        System.out.println(" Book not found: " + name);
     }
 
-    // Display all books
-    public void displayAllBooks() {
-        if (bookArray.isEmpty()) {
-            System.out.println("No books in the library.\n");
+    public void showAllBooks() {
+        if (books.isEmpty()) {
+            System.out.println("No books in library");
             return;
         }
-        System.out.println("=== All Books in Library ===");
-        for (Book book : bookArray) {
+        System.out.println("=== ALL BOOKS ===");
+        for (Book book : books) {
             book.displayInfo();
         }
-        System.out.println();
     }
 }
