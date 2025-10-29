@@ -1,18 +1,18 @@
 public class Book {
     private String name;
+    private String title;
+    private String id;
     private String author;
-    private double price;
     private int count;
 
-    // Parameterized constructor
-    public Book(String name, String author, double price, int count) {
+    public Book(String name, String title, String id, String author, int count) {
         this.name = name;
+        this.title = title;
+        this.id = id;
         this.author = author;
-        this.price = price;
         this.count = count;
     }
 
-    // Getters and setters
     public String getName() {
         return name;
     }
@@ -21,31 +21,36 @@ public class Book {
         this.name = name;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getAuthor() {
         return author;
     }
-
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public int getCount() {
         return count;
     }
-
     public void setCount(int count) {
         this.count = count;
     }
 
     public void displayInfo() {
-        System.out.println("Title: " + name + " | Author: " + author + " | Price: $" + price + " | Stock: " + count);
+        System.out.println("Name: " + name + "  Title: " + title + "  ID: " + id + " Author: " + author + "  Stock: " + count);
     }
 }
